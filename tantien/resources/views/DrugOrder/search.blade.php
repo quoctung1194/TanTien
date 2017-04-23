@@ -7,6 +7,10 @@
         </div>
     </div>
     <div class="box-body">
+        {{ Form::open([
+            'class' => 'form-horizontal',
+            'id' => 'searchForm'
+        ])}}
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -38,5 +42,6 @@
                 </div>
             </div>
         </div>
+        {{ Form::close() }}
     </div>
 </div>

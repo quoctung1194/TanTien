@@ -11,4 +11,8 @@
 |
 */
 
-Route::get('/', 'DrugOrderController@index')->name('DO-001');
+Route::get('/', 'DrugOrderController@index')->name('DO-index');
+
+Route::group(['prefix' => 'DrugOrder'], function() {
+    Route::get('/search', 'DrugOrderController@search')->name('DO-search');
+});
