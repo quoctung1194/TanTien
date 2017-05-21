@@ -1,0 +1,1 @@
+@include('DrugOrder.ajax.form', ['action' => 'add'])

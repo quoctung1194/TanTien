@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -20,6 +21,8 @@
   <link href="{{ TUrl::asset('plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet">
   <!-- Customer -->
   <link href="{{ TUrl::asset('css/main.css') }}" rel="stylesheet">
+  <!-- Select 2 -->
+  <link href="{{ TUrl::asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -86,10 +89,10 @@
     </section>
     <section class="content data-list" id="{{$controller}}DataList"></section>
     <section class="content">
-        <div class="modal fade {{$controller}}" role="dialog" id="Add{{$controller}}Modal"></div>
+        <div class="modal fade {{$controller}}" role="dialog" id="add{{$controller}}Modal"></div>
     </section>
     <section class="content">
-        <div class="modal fade {{$controller}}" role="dialog" id="Edit{{$controller}}Modal"></div>
+        <div class="modal fade {{$controller}}" role="dialog" id="edit{{$controller}}Modal"></div>
     </section>
     @yield('content')
   </div>
@@ -126,6 +129,10 @@
 <!-- DataTables -->
 <script src="{{ TUrl::asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ TUrl::asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+<!-- Select 2 -->
+<script src="{{ TUrl::asset('plugins/select2/js/select2.min.js') }}"></script>
+<!-- JQuery Validator -->
+<script src="{{ TUrl::asset('plugins/jQueryValidator/jquery.validate.min.js') }}"></script>
 <!-- Main javascript -->
 <script src="{{ TUrl::asset('js/functions.js') }}"></script>
 <script src="{{ TUrl::asset('js/main.js') }}"></script>

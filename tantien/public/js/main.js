@@ -4,12 +4,16 @@ $(function () {
     if (idsModule) {
         // get name controller
         var moduleController = idsModule.attr('controller');
-        //render search view
+        // render search view
         searchData(moduleController);
+        // init event for search form
+        autoSearchData(moduleController);
     }
 
     $(document).ajaxComplete(function () {
         applyMainPagingAjax(moduleController);
+        showAddForm();
+        removeRow();
     });
 });
 
@@ -17,7 +21,8 @@ $(function () {
  * Apply paging Ajax
  * @param controller
  */
-function applyMainPagingAjax(controller) {
+function applyMainPagingAjax(controller)
+{
     $('.paginator a').off('click').on('click', function () {
         if ($(this).attr('href') == undefined || $(this).attr('href') == '') {
             return false;

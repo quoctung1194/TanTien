@@ -24,7 +24,7 @@
 }
 .margin-left-10{
     margin-left: 10px;
-   width: 444px;
+    width: 444px;
 }
 .margin-left-8{
     margin-left: 8px;
@@ -437,10 +437,10 @@ form textarea.error {
     font-family: Yu Gothic,Hiragino Kaku Gothic Pro,Meiryo,MS PGothic,sans-serif !important;
 }*/
 
-.input, .form-control
+/*.input, .form-control
 {
     font-family: Yu Gothic,Hiragino Kaku Gothic Pro,Meiryo,MS PGothic,sans-serif !important;
-}
+}*/
 
 .labelRed
 {
@@ -626,7 +626,7 @@ textarea.form-control
 .btn-list
 {
     border-radius: 3px;
-    font-size: 10px !important;
+    font-size: 13px !important;
     padding: 1px 5px !important
 }
 

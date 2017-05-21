@@ -13,7 +13,13 @@
                     <p></p>
                 </div>
                 <div class="btn-group pull-right">
-                    
+                    {{ Form::button(__('index.add new'), [
+                        'class' => 'add-action btn btn-primary',
+                        'data-object' => $controller,
+                        'type' => 'button',
+                        'data-toggle' => 'modal',
+                        'data-target' => '#add' . $controller . 'Modal'
+                    ])}}
                 </div>
             </div>
             <div class="scrollView">
@@ -31,7 +37,11 @@
                             <tr>
                                 <td>{{ $order->code }}</td>
                                 <td>20 000 000 VND</td>
-                                <td></td>
+                                <td>
+                                    <a href="#" class="delete-action btn btn-danger btn-list">
+                                        {{ __('index.remove') }}
+                                    </a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
