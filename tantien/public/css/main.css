@@ -1,0 +1,713 @@
+.pad5{
+    padding: 5px;
+}
+.pad10{
+    margin-top: 10px;
+}
+#deleteConfirmModal{
+    z-index: 1060;
+}
+.margin-left-13{
+    margin-left: 13px;
+}
+.margin-left-18{
+
+    margin-left: -18px;
+}
+.margin-left-5{
+    margin-left: 5px;
+    padding-top: 2px
+}
+.label-classify{
+    bottom: 2px;
+    left: 12px;
+}
+.margin-left-10{
+    margin-left: 10px;
+    width: 444px;
+}
+.margin-left-8{
+    margin-left: 8px;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .form-control.select-css ,.input-group-addon{
+        padding: 3px 10px 0px 10px !important;
+    }
+    .checkbox input[type=checkbox]{
+        margin-left: -15px !important;
+        position: absolute !important;
+        margin-top: 2px !important;
+    }
+    .label.non-bootstrap-welform input[type='checkbox']{
+        margin-left: -15px !important;
+        margin-top: 2px !important;
+        position: absolute !important;
+    }
+}
+.width50{
+    width:50px;
+}
+.width75{
+    width: 75px;
+}
+.width150{
+    width:150px;
+}
+.width150{
+    width: 170px;;
+}
+.datepicker {
+    z-index: 1050 !important;
+}
+#fromdate-search{
+    z-index: 999 !important;
+}
+#todate-search{
+    z-index: 999 !important;
+}
+.content {
+    min-height: auto;
+}
+form .error {
+    color: red;
+    font-weight: normal;
+}
+
+
+form textarea.error {
+    border: 1px solid red;
+}
+.price{
+
+    height:220px;
+    border: 1px solid;
+    padding: 10px;
+    margin-top: 10px;
+}
+.recLabel{
+    background-color: #ff2a00;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 9px;
+    padding: 1px 8px;
+}
+
+.rightBtn {
+    margin-right: 10px;
+}
+
+.divRight{
+    margin-right: 20px;
+ }
+.input-height{
+    height: 100px;
+
+}
+.sort-action a{
+    color: #000;
+}
+.sort-action a i.active{
+    color: red;
+}
+
+.scrollView {
+    overflow: auto;
+}
+.width-1000px {
+    width: 1000px;
+}
+
+.crossWidth{
+    width: 10px;
+    text-align: center;
+    font-size: 20px;
+}
+.rightDiv{
+    width: 190px;
+}
+
+.table > thead > tr > th, .table > thead > tr > th > a, .table > thead > tr > th > span > a{
+    color: black;
+    vertical-align: top;
+}
+.margin-checbox{
+    margin: auto;
+}
+.width-col{
+    width: 100px;
+}
+.margin-btn{
+    margin-right: 70px;
+}
+
+.group-radio-priority label
+{
+    margin-right: 12px;
+}
+
+.group-radio-accounttype label
+{
+    margin-right: 12px;
+}
+.padding-left-none
+{
+    padding-left:0px;
+}
+
+.margin-top-buttonClear-department
+{
+    /*margin-top:20px;*/
+}
+
+.margin-right-buttonAdd-department {
+    margin-right: 95px;
+}
+
+.button-radius
+{
+    border-radius:4px !important;
+}
+
+.center-button-margin
+{
+    margin:0px 15px !important;
+}
+
+.panel_info_cost
+{
+    border: 1px solid #000000;
+    line-height: 25px;
+    padding: 15px 0 15px 20px;
+}
+.width180{
+    width: 180px;
+}
+.width200{
+    width: 200px;
+ }
+.text-right{
+    text-align: right;
+}
+.intro{
+    color: red;
+}
+.width145{
+    width: 145px;
+}
+
+#tableCalculateCost tr td
+{
+    border:1px solid #000;
+}
+
+#tableCalculateCost tr td label
+{
+    line-height: 25px;
+}
+
+.panel_move_file_cost
+{
+    border: 1px solid #000;
+    height: 150px;
+    text-align: center;
+    padding-top: 60px;
+}
+.footer-moal{
+    text-align: center;
+    margin-top: 36px;
+}
+#filedrag
+{
+    text-align: center;
+    padding: 1em 0;
+    margin: 1em 0;
+    color: #999;
+    border: 2px dashed #999;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.div_tranformY
+{
+    transform: translateY(55%);
+}
+.labelLeft{
+    margin-left: 20px;
+}
+.labelCenter{
+    text-align: center;
+}
+.widthTableCost
+{
+    width: 150%;
+}
+
+.displayNone
+{
+    display: none;
+}
+.btnPDF{
+    float: right;
+    position: absolute;
+    margin-left: 2px;
+    margin-top: 0px;
+}
+.margin-btn{
+    margin-right: 10px;
+}
+.btn-copy{
+    margin-top: -25px;
+    margin-left: -16px;
+    width: 39px;
+
+}
+.btn-del{
+    margin-top: -25px;
+}
+.btn-ec{
+    margin-right: 1px;
+    width: 37px;
+    margin-left: -4px;
+    margin-top: -2px;
+}
+
+.text-margin{
+   margin-left: 40px;
+}
+#filedrag.hover
+{
+    color: #449d44;
+    border-color: #449d44;
+    box-shadow: inset 0 3px 4px #ccc;
+}
+.file {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+    position: relative;
+}
+/*.file {*/
+    /*float: left;*/
+    /*margin-right: 10px;*/
+    /*margin-top: 5px;*/
+/*}*/
+.file a {
+    float: left;
+    padding-top: 36px;
+    width: 80px;
+    word-break: break-all;
+    text-align: center;
+}
+.file .excel,
+.file .xls,
+.file .xlsx {
+    background: url(../img/excel-icon.png) no-repeat top center;
+}
+.file .pdf {
+    background: url(../img/pdf-icon.png) no-repeat top center;
+}
+.file .delete-file {
+    width: auto;
+    margin:auto;
+    float: none;
+}
+.width210{
+    width: 210px;
+}
+.width70{
+    width: 70px;
+}
+#fileselect {
+    display: none !important;
+}
+.file-name {
+    display:inline-block;
+    width:80px;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+.upload-form {
+    position: relative;
+}
+.tran-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: none;
+}
+.width-1500{
+    width: 1500px;
+}
+
+.width-1600{
+    width: 1600px;
+}
+.width-2000{
+    width: 2000px;
+}
+.width-1800{
+    width:1800px;
+}
+.width-250px{
+    width:240px;
+}
+.width-140{
+    width:140px;
+}
+
+.border_dotted_between {
+    border-bottom: 1px dotted #000
+}
+.margin-td{
+    margin-top: 20px;
+}
+.hr-border{
+    border-top: 1px dashed black;
+}
+
+.a4{
+    float: right;
+}
+.er{
+    position: absolute;
+    float: right;
+    left: 120px;
+}
+.width-td{
+    width: 160px;
+}
+.width-90{
+    width: 75px !important;
+}
+.btnInvoice{
+    float: right;
+    position: absolute;
+    margin-left: 10px;
+}
+.btnpdf{
+    float: left;
+    width: 40px;
+    margin-top: 5px;
+}
+.scoll-view{
+    overflow : auto;
+}
+.width-scroll{
+    width: 2000px;
+}
+.width-scrollPr{
+    width: 1500px;
+}
+.width-modal{
+    width: 75%;
+}
+.width135{
+    width: 135px;
+}
+.width140{
+    width: 140px;
+}
+.width120{
+    width: 120px;
+}
+.width160{
+    width: 160px;
+}
+.width300{
+    width: 300px;
+}
+.width125{
+    width: 125px;
+}
+.width130{
+    width: 130px;
+}
+.width100{
+    width: 100px;
+}
+.not-active {
+    pointer-events: none;
+    cursor: default;
+}
+/*body
+{
+    font-family: Yu Gothic,Hiragino Kaku Gothic Pro,Meiryo,MS PGothic,sans-serif !important;
+}*/
+
+/*.input, .form-control
+{
+    font-family: Yu Gothic,Hiragino Kaku Gothic Pro,Meiryo,MS PGothic,sans-serif !important;
+}*/
+
+.labelRed
+{
+    color:red;
+}
+.postions{
+    position: absolute;
+    top: 0;
+    left: 38px;
+}
+.radioCheck{
+    float: right;
+}
+.form-control,.input-group-addon
+{
+    height: 28px;
+    padding: 3px 10px !important;
+}
+
+label
+{
+    font-weight: normal;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th
+{
+    padding: 2px 5px;
+    vertical-align: middle;
+}
+
+textarea.form-control
+{
+    heigh:auto !important;
+}
+
+.bg-pink
+{
+    background-color: #F6D8CE !important;
+}
+
+.select2-container--default .select2-selection--single, .select2-selection .select2-selection--single
+{
+    height: 28px;
+    padding: 3px 12px;
+}
+
+.content
+{
+    padding: 0px 15px;
+}
+
+.btn
+{
+    padding: 1px 8px;
+}
+
+.totalAmount .table-bordered{border:1px solid grey}
+.totalAmount .table-bordered>thead>tr>th, .totalAmount .table-bordered>tbody>tr>th, .totalAmount.table-bordered>tfoot>tr>th,.totalAmount .table-bordered>thead>tr>td, .totalAmount.table-bordered>tbody>tr>td, .totalAmount.table-bordered>tfoot>tr>td{border:1px solid grey}
+
+.price td{
+    padding:5px;
+}
+.price > td > .pad15{
+    padding: 0 15px;
+}
+
+.isCurrency
+{
+    text-align: right;
+}
+
+#tableCalculateCost
+{
+    border:none;
+}
+
+.width-1200 {
+    width: 1200px;
+}
+
+.padleft15{
+    padding-left: 15px;
+}
+.label-checkbox {
+    float: right;
+    position: absolute;
+    top: 0px;
+    left: 31px;
+    margin-top: 3px;
+}
+.columnCostName
+{
+    width: 130px;
+}
+.textRight{
+    text-align: right;
+}
+.fontSize{
+    font-size: 11px;
+}
+.control_label_right
+{
+    text-align: right;
+}
+
+.width_table_cost
+{
+    width: 1850px;
+}
+/*Begin Customer table*/
+.table-customer{
+    table-layout:fixed;
+}
+.table-customer td{
+    word-wrap:break-word;
+}
+/*End Customer table*/
+.table-user-pic{
+    table-layout:fixed;
+}
+.table-user-pic td{
+    word-wrap:break-word;
+}
+.div-cb-confirm-admin div{
+    margin: 3px 0px 0px 0px !important;
+}
+
+.btnDeleteFile
+{
+    padding-top: 0px !important;
+}
+
+/*.btnDeleteFile*/
+/*{*/
+    /*margin-top:36px;*/
+    /*padding-top: 0px !important;*/
+/*}*/
+
+
+.box-title
+{
+    font-size:24px !important;
+}
+
+.padding-none
+{
+    padding-left:0px;
+    padding-right:0px;
+}
+
+.padding-right-none
+{
+    padding-right:0px;
+}
+
+.width-redLabel
+{
+    width: 50px !important;
+}
+.col-lg-cts-12_5{
+    width: 12.5%;
+}
+@media (min-width: 768px) {
+    .content-wrapper
+    {
+        min-height: 768px !important;
+    }
+}
+
+.marginRedLabel
+{
+    margin : 0px 2px;
+}
+
+.col-lg-cts-11{
+    width: 11%;
+}
+
+.col-lg-cts-12{
+    width: 12%;
+}
+
+.btn-list
+{
+    border-radius: 3px;
+    font-size: 13px !important;
+    padding: 1px 5px !important
+}
+
+.col-lg-cts-10{
+    width: 10%;
+}
+.col-lg-cts-9{
+    width: 9%;
+}
+.col-lg-cts-8{
+    width: 8%;
+}
+
+.label-center
+{
+    padding-top:4px !important;
+    margin-bottom: 0px !important;
+}
+
+.width-200
+{
+    width: 200px !important;
+}
+
+.width-1300{
+    width: 1300px;
+}
+.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+    position: absolute;
+    margin-top: 4px;
+    margin-left: -15px;
+}
+label.non-bootstrap-welform{
+    padding-left: 15px;
+}
+label.non-bootstrap-welform input[type='checkbox']{
+    margin-left: -15px;
+    margin-top: 4px;
+    position: absolute;
+}
+div.group-radio-accounttype label{
+    padding-left: 15px;
+}
+div.group-radio-accounttype label input[type='radio']{
+    margin-left: -15px;
+    margin-top: 4px;
+    position: absolute;
+}
+.add_invoice_detail,.remove_invoice_row,.copyRow,.deleteRowm,.remove_department,.deleteRow{
+    margin-top: 2px;
+}
+
+.estimate-table{
+    width: 1040px;
+}
+.estimate-table .prices{
+    width: 150px;
+}
+.estimate-table .estimteSuneach,.estimate-table .estimteSuneach-head{
+    width: 180px;
+}
+.estimate-table .weight{
+    width: 85px;
+}
+.estimate-table .weight .tel > input{
+    width: 65px;
+}
+.estimate-table .type{
+    width: 230px;
+}
+.permissions-radio label{
+    padding-right: 20px;
+}
+div.department-select div.input{
+    border: solid 1px #d2d6de;
+}
+#invoice_detail_div .row{
+    margin-left: 0;
+    margin-right: 0;
+}
+.sort-action.accuracy-name{
+    width: 70px;
+    min-width: 70px;
+}
