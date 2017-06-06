@@ -23,6 +23,8 @@
   <link href="{{ TUrl::asset('css/main.css') }}" rel="stylesheet">
   <!-- Select 2 -->
   <link href="{{ TUrl::asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+  <!-- Date picker css -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -63,8 +65,13 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li>
-          <a href="#">
+          <a href="{{ route('DO-index') }}">
             <i class="fa fa-th"></i><span>{{ __('index.drugOrder') }}</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('D-index') }}">
+            <i class="fa fa-th"></i><span>{{ __('index.drug') }}</span>
           </a>
         </li>
       </ul>
@@ -85,6 +92,8 @@
         </div>
     </section>
     <section class="content search-form">
+        @include('Layout.alert.success')
+        @include('Layout.alert.error')
         @include($controller . '.search')
     </section>
     <section class="content data-list" id="{{$controller}}DataList"></section>
@@ -136,6 +145,9 @@
 <!-- Main javascript -->
 <script src="{{ TUrl::asset('js/functions.js') }}"></script>
 <script src="{{ TUrl::asset('js/main.js') }}"></script>
+<!-- Date picker -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 @yield('javascript')
 </body>
 </html>
+@include('Layout.modal.delete_confirm')

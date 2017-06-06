@@ -15,16 +15,17 @@
         <input type="hidden" id="DO-getSum" value="{{ route('DO-getSum') }}" />
 
         <form class="form-horizontal" id="{{ $action . $controller . 'ModalForm' }}">
+            <input type="hidden" id="id" value="{{ $drugOrder->id }}" name="id" />
             <div class="box-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">
                         {{ __('index.drugOrder code') }}
                     </label>
                     <div class="col-sm-8">
-                        {{ Form::text('code', null, [
+                        {{ Form::text('code', $drugOrder->code, [
                             'class' => 'form-control',
                             'required' => 'required',
-                            'placeholder' => __('index.drugOrder code')
+                            'placeholder' => __('index.drugOrder code'),
                         ])}}
                     </div>
                 </div>
@@ -59,7 +60,7 @@
                                     'range' => '[1, 100]'
                                 ])}}
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                                 <label>0 VND</label>
                             </td>
                             <td>
@@ -87,25 +88,99 @@
                             <th width="15%">
                                 {{ __('index.quantity') }}
                             </th>
-                            <th width="20%">
+                            <th width="20%" style="text-align: right;">
                                 {{ __('index.total cash') }}
                             </th>
                             <th width="auto">
                             </th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                        @if ($action === 'edit')
+                            @php
+                                $index = 0;
+                            @endphp
+
+                            @foreach ($drugOrder->orderDetails as $item)
+                            <tr id="addDrug-{{ ++$index }}">
+                                <td>
+                                    {{ $index }}
+                                </td>
+                                <td>
+                                    {{ Form::select('', [$item->drug_id => $item->drug->name], null, [
+                                        'class' => 'form-control drug-select2',
+                                        'required' => 'required',
+                                        'name' => 'drugDetail[' . $index . '][drug_id]',
+                                        'data-target' => $index
+                                    ])}}    
+                                </td>
+                                <td>
+                                    {{ Form::select('', [$item->unit_id => $item->unit->name], null, [
+                                        'class' => 'form-control unit-select2',
+                                        'required' => 'required',
+                                        'name' => 'drugDetail[' . $index . '][unit_id]',
+                                        'data-target' => $index
+                                    ])}}
+                                    <script>
+                                        loadUnitCombobox(
+                                            '{{ $item->drug_id }}',
+                                            '[name="drugDetail[{{$index}}][unit_id]"]'
+                                        );
+                                    </script>
+                                </td>
+                                <td>
+                                    {{ Form::number('', $item->quantity, [
+                                        'class' => 'form-control quantity',
+                                        'required' => 'required',
+                                        'range' => '[1, 100]',
+                                        'name' => 'drugDetail[' . $index . '][quantity]',
+                                        'data-target' => $index,
+                                        'onChange' => 'getSumOfDrug(' . $index . ')',
+                                    ])}}
+                                </td>
+                                <td style="text-align: right;">
+                                    <label name="drugDetail[{{ $index }}][sum]">
+                                        {{ number_format($item->sum, 0, '.', ' ') }} VND
+                                    </label>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger removeRow">
+                                        {{ __('index.remove') }}
+                                    </button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
                 </table>
 
-                <button type="button" class="btn btn-primary pull-right pad10" onclick="addNewDrugOrderRow()">
+                @if ($action === 'edit')
+                <table class="table table-bordered">
+                     <tr>
+                        <td colspan="5">
+                            <div class="row pad5"  style="margin-right: 10px">
+                                <h4 class="pull-right pad10" >
+                                    <b>{{ number_format($drugOrder->getTotal(), 0, '.', ' ') }} VND</b>
+                                </h4>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                @endif
+
+                <button type="button" class="btn btn-primary pull-right pad10"
+                    onclick="addNewDrugOrderRow('{{ $action . $controller . 'ModalForm' }}')">
                     {{ __('index.add new') }}
                 </button>
-
             </div>
 
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">{{ __('index.save') }}</button>
-                <button type="submit" class="btn btn-defauly active">Sign in</button>
+                <button type="submit" class="btn btn-primary">
+                    {{ __('index.save') }}
+                </button>
+                <button type="submit" data-dismiss="modal" class="btn btn-defauly active">
+                    {{ __('index.close') }}
+                </button>
             </div>
         </form>
     </div>

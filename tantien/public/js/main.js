@@ -10,10 +10,16 @@ $(function () {
         autoSearchData(moduleController);
     }
 
+    loadDatepicker();
+
     $(document).ajaxComplete(function () {
         applyMainPagingAjax(moduleController);
         showAddForm();
         removeRow();
+        showEditForm();
+        removeHtmlDialogWhenClose(moduleController);
+        showDeleteConfirmBox();
+        runDelete();
     });
 });
 
@@ -34,5 +40,15 @@ function applyMainPagingAjax(controller)
         });
 
         return false;
+    });
+}
+
+/**
+ * Loading date picker
+ */
+function loadDatepicker()
+{
+    $( ".datepicker" ).datepicker({
+        dateFormat: "dd/mm/yy"
     });
 }

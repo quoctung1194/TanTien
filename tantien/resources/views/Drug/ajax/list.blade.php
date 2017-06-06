@@ -10,11 +10,7 @@
         <div class="dataTables_wrapper form-inline dt-bootstrap">
             <div class="box-header">
                 <div class="btn-group pull-left">
-                    <h4>
-                        @if($displaySum)
-                            {{ __('index.sum of date') . ' : ' . number_format($sum, 0, '.', ' ') }} VND
-                        @endif
-                    </h4>
+                    <p></p>
                 </div>
                 <div class="btn-group pull-right">
                     {{ Form::button(__('index.add new'), [
@@ -31,26 +27,27 @@
                     <table id="{{ $controller }}" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th width="30%" scope="col" class="sort-action">{{ __('index.drugOrder code') }}</th>
-                                <th width="55%" scope="col" class="sort-action">{{ __('index.total cash') }}</th>
+                                <th width="30%" scope="col" class="sort-action">{{ __('index.drug name') }}</th>
+                                <th width="55%" scope="col" class="sort-action">{{ __('index.drug price') }}</th>
                                 <th width="15%" scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($drugOrder as $order)
+                            @foreach($drugs as $drug)
                             <tr>
                                 <td>
-                                    <a href="javascript:void(0)" class="edit-action" data-id="{{ $order->id }}" data-object="{{ $controller }}">
-                                        {{ $order->code }}
+                                    <a href="javascript:void(0)" class="edit-action" data-id="{{ $drug->id }}"
+                                        data-object="{{ $controller }}">
+                                        {{ $drug->name }}
                                     </a>
                                 </td>
                                 <td>
-                                    {{ number_format($order->getTotal(), 0, '.', ' ') }} VND
+                                    {{ number_format($drug->price, 0, '.', ' ') }} VND
                                 </td>
                                 <td>
-                                    <a class="delete-action btn btn-danger btn-list" data-id="{{ $order->id }}"
+                                    <a class="delete-action btn btn-danger btn-list" data-id="{{ $drug->id }}"
                                         data-object="{{ $controller }}" >
-                                        {{ __('index.remove') }}
+                                       {{ __('index.remove') }}
                                     </a>
                                 </td>
                             </tr>
@@ -62,4 +59,4 @@
         </div>
     </div>
 </div>
-@include('Layout.paging', ['paginator' => $drugOrder])
+@include('Layout.paging', ['paginator' => $drugs])

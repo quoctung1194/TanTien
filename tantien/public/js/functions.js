@@ -70,18 +70,34 @@ function showAddForm()
 }
 
 /**
+ * Show edit form base on the clicked item
+ */
+function showEditForm() {
+    $('.edit-action').off('click').on('click', function () {
+        var controller = $(this).attr('data-object');
+        var modalData = $('#edit' + controller + 'Modal');
+        var editUri = base_url + '/' + controller + '/edit/' + $(this).attr('data-id');
+
+        modalData.load(editUri, function (res, err, xhr) {
+            handleError(xhr, modalData, controller);
+        });
+        modalData.modal();
+    });
+}
+
+/**
  * Add new row in drugOrder table
  */
- function addNewDrugOrderRow()
+ function addNewDrugOrderRow(parent)
  {
-    let tbody = $('#addDrug > tbody');
-    let defaultRow = $('#defaultTable > tbody > tr').clone();
+    let tbody = $('#' + parent + ' #addDrug > tbody');
+    let defaultRow = $('#' + parent + ' #defaultTable > tbody > tr').clone();
 
     // append to table
     defaultRow.appendTo(tbody);
 
     var ar = new Array();
-    $('#addDrug > tbody > tr').each(
+    $('#' + parent + ' #addDrug > tbody > tr').each(
         function (index) {
             // remake order number
             $(this).children().eq(0).html(++index);
@@ -151,7 +167,7 @@ function formatRepo(repo)
 /**
  * Load drug combobox
  */
-function loadDrugCombobox($parent)
+function loadDrugCombobox($parent = '')
 {
     // route
     let url = $('#DO-getDrugList').val();
@@ -276,7 +292,7 @@ function getSumOfDrug(target)
             success: function (data) {
                 let sum = data.sum;
 
-                $("[name='drugDetail[" + target + "][sum]'").html(sum);
+                $("[name='drugDetail[" + target + "][sum]'").html(sum + ' VND');
             },
             error: function (result) {
                 handleError(result);
@@ -334,10 +350,18 @@ function saveItem(controller, action) {
                 try
                 {    
                     if (result.status) {
-                        $('#' + action + controller + 'Modal').modal('hide');
+                        if(action == 'edit') { // reload edit form
+                            let modalData = $('#' + action + controller + 'Modal');
+                            let url = base_url + "/" + controller + "/" + action + "/" + result.id;
+                            
+                            modalData.load(url, function (res, err, xhr) {
+                                handleError(xhr, modalData, controller);
+                                displaySuccessMessageOnModal('#' + action + controller + 'Modal', 'Cập nhật thành công');
+                            });
+                            modalData.modal();
 
-                        if(action == 'add') {
-                            //showEditFormAfterAddSuccess(controller, result.id, message);
+                        } else { // hide model when add mode
+                            $('#' + action + controller + 'Modal').modal('hide');
                         }
 
                         if(result.isReloadAll === undefined) {
@@ -363,6 +387,35 @@ function saveItem(controller, action) {
     });
 }
 
+/** 
+ * Display success message on modal
+ */
+function displaySuccessMessageOnModal(modalId, message)
+{
+    $(modalId).find('.alert-success.on-modal').remove();
+    var successMsgBlock ='<div class="alert alert-success on-modal" id="common-alert-success"><p id="common-message_success">'+message+'</p></div>';
+    $(modalId).find('.modal-header.first-header').after(successMsgBlock);
+    $(modalId).scrollTop(0);
+    $(".alert.alert-success.on-modal").fadeTo(3000, 500).slideUp(500, function(){
+        $(".alert.on-modal").slideUp(500);
+    });
+}
+
+// Remove all html on add and edit dialog
+function removeHtmlDialogWhenClose(controller)
+{
+    $('#add' + controller + 'Modal').off('hidden.bs.modal').on('hidden.bs.modal', function () {
+        $('#add' + controller + 'Modal').html('');
+    });
+    
+    $('#edit' + controller + 'Modal').off('hidden.bs.modal').on('hidden.bs.modal', function () {
+        $('#edit' + controller + 'Modal').html('');
+    });
+}
+
+/**
+ * Display message error
+ */
 function displayErrorMessageOnModal(modalId, message)
 {
     $(modalId).find('.alert-danger.on-modal').remove();
@@ -372,6 +425,71 @@ function displayErrorMessageOnModal(modalId, message)
     $(modalId).scrollTop(0);
     $(".alert.alert-danger.on-modal").fadeTo(3000, 500).slideUp(500, function(){
         $(".alert.on-modal").slideUp(500);
+    });
+}
+
+/**
+ * Show delete confirmation
+ */
+function showDeleteConfirmBox() {
+    $('.delete-action').off('click').on('click', function () {
+        if($(this).is('[disabled=disabled]') == false) {
+            $('#deleteYes').attr('data-object', $(this).attr('data-object'));
+            $('#deleteYes').attr('data-id', $(this).attr('data-id'));
+            $('#deleteConfirmModal').modal();
+        }
+    });
+}
+
+/**
+ * Handle click Yes in Delete confirmation box
+ */
+function runDelete() {
+    $('#deleteYes').off('click').on('click', function () {
+        deleteItem($(this).attr('data-object'), $(this).attr('data-id'));
+    });
+}
+
+/**
+ * Delete item from module
+ * @param controller
+ * @param id
+ */
+function deleteItem(controller, id ) {
+    $.ajax({
+        type: "POST",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: base_url + '/' + controller + '/delete',
+        data: {id: id},
+        success: function (result) {
+            try{
+                if (result.status) {
+                    $("#Edit" + controller + "Modal").modal('hide');
+                    $("#alert-success").show();
+                    $(window).scrollTop($('#alert-success').position().top);
+                    $("#message_success").text("Xóa thành công");
+                    searchData(controller);
+                    setTimeout(function () {
+                        $("#alert-success").hide();
+                    }, 3600);
+                } else {
+                    $("#alert-error").show();
+                    $(window).scrollTop($('#alert-error').position().top);
+                    setTimeout(function () {
+                        $("#alert-error").hide();
+                    }, 3600);
+                }
+            }
+            catch (e)
+            {
+                console.log(e);
+            }
+        },
+        error: function (result) {
+            handleError(result);
+        }
     });
 }
 
@@ -390,5 +508,4 @@ function handleError(xhr, modalData, controller)
     } else if (xhr.status == 500) {
         alert('Lỗi hệ thống, vui lòng liên hệ IT');
     }
-
 }

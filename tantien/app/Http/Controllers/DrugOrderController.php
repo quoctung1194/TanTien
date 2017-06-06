@@ -12,16 +12,6 @@ use App\OrderDetail;
 class DrugOrderController extends Controller
 {
     /**
-     * Constructor
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
      * Index action
      *
      * @return void
@@ -42,6 +32,18 @@ class DrugOrderController extends Controller
         $limit = \Config::get('tantien.limit');
         // assign from form values
         $code = $request->code;
+        $date = $request->date;
+        // sum of order
+        $sum = 0;
+        $displaySum = false;
+
+        // convert date to sql data
+        if(!empty($date)) {
+            $date = \DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d');
+            $sum = $this->getSumByDate($date);
+            $displaySum = true;
+        }
+
         // query builder
         $query = DrugOrder::query();
 
@@ -49,7 +51,13 @@ class DrugOrderController extends Controller
         $find_condition = [
             ['code', 'like', '%' . $code . '%']
         ];
-        $query = $query->where($find_condition);
+        $query = $query
+            ->with('orderDetails')
+            ->where($find_condition);
+        // search date
+        if(!empty($date)) {
+            $query = $query->whereDate('created_at', '=', $date);            
+        }
 
         // get sorting columns array
         $sortArr = $this->getSortColumns();
@@ -60,7 +68,7 @@ class DrugOrderController extends Controller
         // result list
         $drugOrder = $query->paginate($limit);
 
-        return $this->view('ajax.list', compact('drugOrder'));
+        return $this->view('ajax.list', compact('drugOrder', 'sum', 'displaySum'));
     }
 
     /**
@@ -148,6 +156,114 @@ class DrugOrderController extends Controller
     }
 
     /**
+     * Edit method
+     *
+     * @return void
+     */
+    public function edit(Request $request)
+    {
+        // init new entity
+        $id = $request->id;
+        $drugOrder = DrugOrder::with('orderDetails.drug', 'orderDetails.unit')->find($id);
+
+        if ($request->isMethod('post')) {
+
+            // get form values
+            $code = $request->code;
+            $drugDetails = $request->drugDetail;
+
+            // checking validate
+            if (DrugOrder::where('code', $code)
+                    ->where('id', '!=', $id)
+                    ->count() > 0) { // checking duplicate code
+                $result = [
+                    'status' => false,
+                    'error' => (object)[
+                        'msg' => __('index.drugOrder duplicate'),
+                    ]
+                ];
+
+                echo json_encode($result);
+                return;
+            } else if (!isset($drugDetails)) { // checking list drug empty
+                $result = [
+                    'status' => false,
+                    'error' => (object)[
+                        'msg' => __('index.drugOrder emptyDrugList'),
+                    ]
+                ];
+
+                echo json_encode($result);
+                return;
+            }
+
+            // update order
+            $drugOrder->code = $code;
+            // delete all orderDetails element
+            $oldDrugdetails = $drugOrder->orderDetails()->delete();
+
+            // assign drug info into array
+            $orderDetails = [];
+            foreach ($drugDetails as $drug) {
+               $item = new OrderDetail();
+               $item->fill($drug);
+
+               // get total sum
+               $item->sum = $this->calculateSum($drug['drug_id'], $drug['unit_id'], $drug['quantity']);
+               $orderDetails[] = $item;
+            }
+
+            // saving to database
+            $status = false;
+            if($drugOrder->save()) {
+                $status = $drugOrder->orderDetails()->saveMany($orderDetails);
+            }
+                
+
+            // response to client
+            if(!$status) {
+                $result = [
+                    'status' => false,
+                    'error' => (object)[
+                        'msg' => __('index.common_save_error'),
+                    ]
+                ];
+            } else {
+                $result = [
+                    'status' => true,
+                    'id' => $drugOrder->id,
+                ];
+            }
+
+            echo json_encode($result);
+            return;
+        }
+
+        // set variables and render view
+        return $this->view('ajax.edit', compact('drugOrder'));
+    }
+
+    /**
+     * Delete method
+     *
+     * @param string|null $id Bank id.
+     */
+    public function delete(Request $request)
+    {
+        // get id
+        $id = $request->id;
+        // get entity
+        $drugOrder = DrugOrder::find($id);
+        // delete entity
+        $drugOrder->delete();
+
+        // print json format
+        return response()->json([
+            'status' =>  true
+        ]);
+    }
+
+    /**
      * Get Drug information
      *
      * @return void
@@ -218,11 +334,11 @@ class DrugOrderController extends Controller
         $unitId = $request->unitId;
         $quantity = $request->quantity;
 
-        $sum = $this->calculateSum($drugId, $unitId, $quantity);
+        $sum = ceil($this->calculateSum($drugId, $unitId, $quantity));
 
         // print json format
         return response()->json([
-            'sum' =>  $sum
+            'sum' =>  number_format($sum, 0, '.', ' '),
         ]);
     }
 
@@ -275,6 +391,25 @@ class DrugOrderController extends Controller
             }
 
             $sum = $maxUnitPrice/$totalQuantity * $quantity;
+        }
+
+        return $sum;
+    }
+
+    /**
+     * Get sum by date
+     */
+    private function getSumByDate($date)
+    {
+        // query builder
+        $query = DrugOrder::query();
+
+        $query = $query->whereDate('created_at', '=', $date);
+        
+        $orders = $query->get();
+        $sum = 0;
+        foreach ($orders as $order) {
+            $sum += $order->getTotal();
         }
 
         return $sum;
