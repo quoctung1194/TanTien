@@ -69,7 +69,11 @@ class DrugController extends Controller
             // get form values
             $name = $request->name;
             $standardDetails = $request->standard;
-            $specialDetails = $request->special;
+            if(!empty($request->special)) {
+                $specialDetails = $request->special;
+            } else {
+                $specialDetails = [];
+            }
 
             // checking validate
             if (Drug::where('name', strtolower($name))->count() > 0) {
@@ -87,16 +91,6 @@ class DrugController extends Controller
                     'status' => false,
                     'error' => (object)[
                         'msg' => __('index.drug emptyStandard'),
-                    ]
-                ];
-
-                echo json_encode($result);
-                return;
-            } else if (!isset($specialDetails)) {
-                $result = [
-                    'status' => false,
-                    'error' => (object)[
-                        'msg' => __('index.drug emptySpecial'),
                     ]
                 ];
 
@@ -126,19 +120,24 @@ class DrugController extends Controller
 
             // assign special into array
             $specialPrices = [];
-            foreach($specialDetails as $special) {
-                $item = new SpecialPrice();
-                $item->fill($special);
+            if(!empty($request->special)) {
+                foreach($specialDetails as $special) {
+                    $item = new SpecialPrice();
+                    $item->fill($special);
 
-                $specialPrices[] = $item;
+                    $specialPrices[] = $item;
+                }
             }
+
             $drug->fill($request->all());
             
             // saving to database
             $status = false;
             if($drug->save()) {
                 $status = $drug->unitPirce()->saveMany($unitPrices);
-                $status = $drug->specialPrice()->saveMany($specialPrices);
+                if(!empty($request->special)) {
+                    $status = $drug->specialPrice()->saveMany($specialPrices);
+                }
             }
 
             // response to client
@@ -181,7 +180,11 @@ class DrugController extends Controller
             // get form values
             $name = $request->name;
             $standardDetails = $request->standard;
-            $specialDetails = $request->special;
+            if(!empty($request->special)) {
+                $specialDetails = $request->special;
+            } else {
+                $specialDetails = [];
+            }
 
             // checking validate
             if (Drug::where('name', strtolower($name))
@@ -201,16 +204,6 @@ class DrugController extends Controller
                     'status' => false,
                     'error' => (object)[
                         'msg' => __('index.drug emptyStandard'),
-                    ]
-                ];
-
-                echo json_encode($result);
-                return;
-            } else if (!isset($specialDetails)) {
-                $result = [
-                    'status' => false,
-                    'error' => (object)[
-                        'msg' => __('index.drug emptySpecial'),
                     ]
                 ];
 
@@ -244,19 +237,24 @@ class DrugController extends Controller
             $drug->specialPrice()->delete();
             // assign special into array
             $specialPrices = [];
-            foreach($specialDetails as $special) {
-                $item = new SpecialPrice();
-                $item->fill($special);
+            if(!empty($request->special)) {
+                foreach($specialDetails as $special) {
+                    $item = new SpecialPrice();
+                    $item->fill($special);
 
-                $specialPrices[] = $item;
+                    $specialPrices[] = $item;
+                }
             }
+
             $drug->fill($request->all());
             
             // saving to database
             $status = false;
             if($drug->save()) {
                 $status = $drug->unitPirce()->saveMany($unitPrices);
-                $status = $drug->specialPrice()->saveMany($specialPrices);
+                if(!empty($request->special)) {
+                    $status = $drug->specialPrice()->saveMany($specialPrices);
+                }
             }
 
             // response to client
