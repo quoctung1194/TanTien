@@ -211,7 +211,6 @@ function loadDrugCombobox($parent = '')
 
             loadUnitCombobox(value, target, '');
             // reset other remain input
-            $(".unit-select2" + target).val('').trigger('change');
             $(".quantity" + quantityTarget)
                 .val('1')
                 .off('change')
@@ -272,7 +271,7 @@ function getSumOfDrug(target)
 {
     let drugId = $("[name='drugDetail[" + target + "][drug_id]']").val();
     let unitId = $("[name='drugDetail[" + target + "][unit_id]']").val();
-    let quantity = $("[name='drugDetail[" + target + "][quantity]'").val();
+    let quantity = $("[name='drugDetail[" + target + "][quantity]']").val();
     // route
     let url = $('#DO-getSum').val() + '/' + drugId;
 
@@ -292,7 +291,7 @@ function getSumOfDrug(target)
             success: function (data) {
                 let sum = data.sum;
 
-                $("[name='drugDetail[" + target + "][sum]'").html(sum + ' VND');
+                $("[name='drugDetail[" + target + "][sum]']").html(sum + ' VND');
             },
             error: function (result) {
                 handleError(result);
