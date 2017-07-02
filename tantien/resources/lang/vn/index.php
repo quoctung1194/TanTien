@@ -13,9 +13,18 @@ return [
     'add new' => 'Thêm mới',
     'unit' => 'Đơn vị',
     'quantity' => 'Số lượng',
+    'unit_ref' => 'Đơn vị tham chiếu',
     'save' => 'Lưu',
+    'close' => 'Đóng',
     'common_save_error' => 'Không thể lưu, vui lòng thử lại',
     'common_save_success' => 'Lưu thành công',
+    'confirm' => 'Xác nhận',
+    'confirm_delete_message' => 'Bạn có chắc muốn xóa không ?',
+    'confirm_yes' => 'Đổng ý',
+    'confirm_no' => 'Không',
+    'price' => 'Giá',
+    'date' => 'Ngày',
+    'sum of date' => 'Tổng tiền trong ngày',
     // drug Order
     'drugOrder' => 'Hóa đơn thuốc',
     'drugOrder code' => 'Mã đơn thuốc',
@@ -23,5 +32,13 @@ return [
     'drugOrder duplicate' => 'Mã đơn thuốc đã tồn tại',
     'drugOrder emptyDrugList' => 'Danh sách thuốc không được để trống',
     // drug
-    'drug name' => 'Tên thuốc'
+    'drug' => 'Thuốc',
+    'drug name' => 'Tên thuốc',
+    'drug price' => 'Giá đơn thuốc bán ra',
+    'drug original_price' => 'Giá gốc',
+    'drug duplicate' => 'Thuốc đã tồn tại',
+    'drug standard' => 'Quy cách',
+    'drug special_prices' => 'Giá đặc biệt',
+    'drug emptyStandard' => 'Quy cách không được để trống',
+    'drug emptySpecial' => 'Giá đặc biệt không được để trống',
 ];

@@ -11,30 +11,12 @@
             'class' => 'form-horizontal',
             'id' => 'searchForm'
         ])}}
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label label-center padding-right-none">
-                            {{ __('index.drugOrder code') }}
-                        </label>
-                        <div class="col-sm-8 ui-widget">
-                            {{ Form::text('code', null, [
-                                'class' => 'form-control search-input',
-                            ])}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label label-center padding-right-none">
-                            {{ __('index.date') }}
-                        </label>
-                        <div class="col-sm-8 ui-widget">
-                            {{ Form::text('date', null, [
-                                'class' => 'form-control search-input datepicker',
-                            ])}}
-                        </div>
-                    </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label label-center padding-right-none">
+                    {{ __('index.drug name') }}
+                </label>
+                <div class="col-sm-5 ui-widget">
+                    <input type="text" name="name" class="form-control name" />
                 </div>
             </div>
             <div class="row">

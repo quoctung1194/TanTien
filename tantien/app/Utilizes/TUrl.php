@@ -2,7 +2,7 @@
 
 namespace App\Utilizes;
 
-use App\constants\CommonConstant;
+use App\Constants\CommonConstant;
 
 class TUrl
 {
