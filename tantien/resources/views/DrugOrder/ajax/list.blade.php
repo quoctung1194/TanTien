@@ -41,7 +41,7 @@
                             <tr>
                                 <td>
                                     <a href="javascript:void(0)" class="edit-action" data-id="{{ $order->id }}" data-object="{{ $controller }}">
-                                        {{ $order->code }}
+                                        {{ $order->id }}
                                     </a>
                                 </td>
                                 <td>

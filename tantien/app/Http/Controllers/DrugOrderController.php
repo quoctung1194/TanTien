@@ -84,21 +84,9 @@ class DrugOrderController extends Controller
         if ($request->isMethod('post')) {
 
             // get form values
-            $code = $request->code;
             $drugDetails = $request->drugDetail;
 
-            // checking validate
-            if (DrugOrder::where('code', $code)->count() > 0) {
-                $result = [
-                    'status' => false,
-                    'error' => (object)[
-                        'msg' => __('index.drugOrder duplicate'),
-                    ]
-                ];
-
-                echo json_encode($result);
-                return;
-            } else if (!isset($drugDetails)) {
+            if (!isset($drugDetails)) {
                 $result = [
                     'status' => false,
                     'error' => (object)[
@@ -112,7 +100,6 @@ class DrugOrderController extends Controller
 
             // making new order
             $drugOrder = new DrugOrder();
-            $drugOrder->code = $code;
 
             // assign drug info into array
             $orderDetails = [];
@@ -169,23 +156,9 @@ class DrugOrderController extends Controller
         if ($request->isMethod('post')) {
 
             // get form values
-            $code = $request->code;
             $drugDetails = $request->drugDetail;
 
-            // checking validate
-            if (DrugOrder::where('code', $code)
-                    ->where('id', '!=', $id)
-                    ->count() > 0) { // checking duplicate code
-                $result = [
-                    'status' => false,
-                    'error' => (object)[
-                        'msg' => __('index.drugOrder duplicate'),
-                    ]
-                ];
-
-                echo json_encode($result);
-                return;
-            } else if (!isset($drugDetails)) { // checking list drug empty
+            if (!isset($drugDetails)) { // checking list drug empty
                 $result = [
                     'status' => false,
                     'error' => (object)[
@@ -198,7 +171,6 @@ class DrugOrderController extends Controller
             }
 
             // update order
-            $drugOrder->code = $code;
             // delete all orderDetails element
             $oldDrugdetails = $drugOrder->orderDetails()->delete();
 

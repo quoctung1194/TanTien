@@ -17,18 +17,16 @@
         <form class="form-horizontal" id="{{ $action . $controller . 'ModalForm' }}">
             <input type="hidden" id="id" value="{{ $drugOrder->id }}" name="id" />
             <div class="box-body">
+                 @if ($action === 'edit')
                 <div class="form-group">
                     <label class="col-sm-2 control-label">
                         {{ __('index.drugOrder code') }}
                     </label>
                     <div class="col-sm-8">
-                        {{ Form::text('code', $drugOrder->code, [
-                            'class' => 'form-control',
-                            'required' => 'required',
-                            'placeholder' => __('index.drugOrder code'),
-                        ])}}
+                        {{ $drugOrder->id }}
                     </div>
                 </div>
+                @endif
                 
                 <div class="modal-header">
                     <h4 class="modal-title">
