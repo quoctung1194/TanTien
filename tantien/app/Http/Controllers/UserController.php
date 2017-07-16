@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        echo \Illuminate\Support\Facades\Hash::make('password');
+        //echo \Illuminate\Support\Facades\Hash::make('password');
         if (!\Auth::check()) {
             return $this->view('login');
         }
