@@ -17,8 +17,13 @@
                         <label class="col-sm-3 control-label label-center padding-right-none">
                             {{ __('index.drugOrder code') }}
                         </label>
-                        <div class="col-sm-8 ui-widget">
-                            {{ Form::text('code', null, [
+                        <div class="col-sm-4 ui-widget">
+                            {{ Form::text('code_from', null, [
+                                'class' => 'form-control search-input',
+                            ])}}
+                        </div>
+                        <div class="col-sm-4 ui-widget">
+                            {{ Form::text('code_to', null, [
                                 'class' => 'form-control search-input',
                             ])}}
                         </div>

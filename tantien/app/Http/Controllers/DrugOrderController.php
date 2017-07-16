@@ -31,26 +31,40 @@ class DrugOrderController extends Controller
         // limit items per page
         $limit = \Config::get('tantien.limit');
         // assign from form values
-        $code = $request->code;
+        $codeFrom = $request->code_from;
+        $codeTo = $request->code_to;
         $date = $request->date;
         // sum of order
         $sum = 0;
         $displaySum = false;
+        $conditions = [];
 
         // convert date to sql data
         if(!empty($date)) {
             $date = \DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d');
-            $sum = $this->getSumByDate($date);
-            $displaySum = true;
+            $conditions['date'] = $date;
         }
 
         // query builder
         $query = DrugOrder::query();
 
         // where conditions
-        $find_condition = [
-            ['code', 'like', '%' . $code . '%']
-        ];
+        $find_condition = [];
+        if(!empty($codeFrom)) {
+            $find_condition[] = ['id', '>=', $codeFrom];
+            $conditions['codeFrom'] = $codeFrom;
+        }
+        if(!empty($codeTo)) {
+            $find_condition[] = ['id', '<=', $codeTo];
+            $conditions['codeTo'] = $codeTo;
+        }
+        
+        // get Sum
+        if(count($conditions) > 0) {
+            $sum = $this->getSumByConditions($conditions);
+            $displaySum = true;
+        }
+
         $query = $query
             ->with('orderDetails')
             ->where($find_condition);
@@ -369,14 +383,25 @@ class DrugOrderController extends Controller
     }
 
     /**
-     * Get sum by date
+     * Get sum by date 
      */
-    private function getSumByDate($date)
+    private function getSumByConditions($conditions)
     {
         // query builder
         $query = DrugOrder::query();
+        $date = isset($conditions['date']) ? $conditions['date'] : '';
+        $codeTo = isset($conditions['codeTo']) ? $conditions['codeTo'] : '';
+        $codeFrom = isset($conditions['codeFrom']) ? $conditions['codeFrom'] : '';
 
-        $query = $query->whereDate('created_at', '=', $date);
+        if(!empty($date)) {
+            $query = $query->whereDate('created_at', '=', $date);
+        }
+        if(!empty($codeFrom)) {
+            $query = $query->where('id', '>=', $codeFrom);
+        }
+        if(!empty($codeTo)) {
+            $query = $query->where('id', '<=', $codeTo);
+        }
         
         $orders = $query->get();
         $sum = 0;

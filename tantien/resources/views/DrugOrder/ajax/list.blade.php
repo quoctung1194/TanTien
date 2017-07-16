@@ -11,8 +11,8 @@
             <div class="box-header">
                 <div class="btn-group pull-left">
                     <h4>
-                        @if($displaySum)
-                            {{ __('index.sum of date') . ' : ' . number_format($sum, 0, '.', ' ') }} VND
+                        @if($displaySum and \Auth::user()->is_admin == 1)
+                            {{ __('index.total cash') . ' : ' . number_format($sum, 0, '.', ' ') }} VND
                         @endif
                     </h4>
                 </div>
