@@ -35,7 +35,7 @@ function applyMainPagingAjax(controller)
         }
 
         var data = $("#searchForm").serialize();
-        $("#" + controller + "DataList").load($(this).attr('href')+'&keep_sorted=1', function (res, err, xhr) {
+        $("#" + controller + "DataList").load($(this).attr('href') + '&' + data + '&keep_sorted=1', function (res, err, xhr) {
             handleError(xhr);
         });
 
