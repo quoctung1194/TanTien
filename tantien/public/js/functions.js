@@ -167,8 +167,12 @@ function formatRepo(repo)
 /**
  * Load drug combobox
  */
-function loadDrugCombobox($parent = '')
+function loadDrugCombobox(parent)
 {
+    if(parent == undefined) {
+        parent = '';
+    }
+
     // route
     let url = $('#DO-getDrugList').val();
 
@@ -198,7 +202,7 @@ function loadDrugCombobox($parent = '')
         templateSelection: formatRepoSelection
     };
 
-    $($parent + " .drug-select2")
+    $(parent + " .drug-select2")
         .select2(config)
         .on('change', function (e) {
             let value = $(this).val();

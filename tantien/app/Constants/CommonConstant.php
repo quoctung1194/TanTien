@@ -4,5 +4,5 @@ namespace App\Constants;
 
 class CommonConstant
 {
-    const RESOURCE_VERSION = 1.1;
+    const RESOURCE_VERSION = 1.2;
 }
